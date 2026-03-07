@@ -1,0 +1,23 @@
+[Unit]
+Description=Celery Worker для ContractCheck.ru
+After=network.target redis.service
+
+[Service]
+Type=forking
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/contractcheck/backend
+ExecStart=/var/www/contractcheck/backend/venv/bin/celery \
+    -A config worker \
+    --loglevel=info \
+    --logfile=/var/log/contractcheck/celery.log \
+    --detach
+ExecStop=/var/www/contractcheck/backend/venv/bin/celery \
+    -A config control shutdown
+Restart=on-failure
+RestartSec=10s
+
+EnvironmentFile=/var/www/contractcheck/backend/.env
+
+[Install]
+WantedBy=multi-user.target

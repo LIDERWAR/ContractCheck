@@ -1,0 +1,106 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Social Network Login Failure" %} - ContractCheck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Unbounded', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#FF8C42',
+                            red: '#FF2E2E',
+                            dark: '#050505',
+                            card: '#0A0A0B',
+                            light: '#E2E2E2'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-brand-dark text-brand-light min-h-screen flex items-center justify-center font-sans selection:bg-brand-orange/30 relative overflow-hidden">
+
+    <!-- Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-brand-orange/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[10%] right-[5%] w-[40%] h-[40%] bg-brand-red/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="w-full max-w-md px-4 relative z-10">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <a href="/" class="flex flex-col items-center gap-3 group">
+                <span
+                    class="text-3xl font-display font-bold text-white transition-colors group-hover:text-brand-orange">
+                    ContractCheck
+                </span>
+            </a>
+        </div>
+
+        <!-- Error Card -->
+        <div class="glass-card rounded-3xl p-8 md:p-10 animate-fade-in-up">
+            <h1 class="text-2xl font-bold text-red-500 mb-2 text-center">
+                {% trans "Ошибка авторизации" %}
+            </h1>
+            <p class="text-gray-400 text-center mb-8 text-sm">
+                {% trans "An error occurred while attempting to login via your social network account." %}
+            </p>
+
+            <div class="mt-8 text-center">
+                <a href="/login.html"
+                    class="w-full inline-block py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold transition duration-200">
+                    {% trans "Вернуться на страницу входа" %}
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center mt-6 text-gray-600 text-xs">
+            &copy; 2026 ContractCheck.
+        </div>
+    </div>
+</body>
+
+</html>

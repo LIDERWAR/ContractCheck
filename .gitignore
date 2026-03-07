@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Virtual Env
+venv/
+env/
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment Variables
+.env
+auth_b64.tmp
+services_b64.tmp
+tasks_b64.tmp
+
+# AI Automation
+autonomous_*.py
+inspect_db.py
+test_extraction.py
+test_*.py
+
+# System
+Thumbs.db
+Desktop.ini
+
+# Sensetive scripts
+deploy_fix.py
+deploy_frontend_fix.py

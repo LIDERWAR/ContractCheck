@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - ContractCheck</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        if (localStorage.getItem('cc_token')) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</head>
+
+<body class="bg-brand-dark text-brand-light min-h-screen flex flex-col font-sans selection:bg-brand-orange/30 relative">
+
+    <!-- Navbar Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-brand-orange/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[10%] right-[5%] w-[40%] h-[40%] bg-brand-red/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="flex-1 flex items-center justify-center w-full py-12 relative z-10">
+        <div class="w-full max-w-md px-4">
+
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <a href="index.html" class="flex flex-col items-center gap-3 group">
+                    <img src="images/favicons/logo-icon.png" alt="Logo" class="w-10 h-10 object-contain">
+                    <span
+                        class="text-3xl font-display font-bold text-white transition-colors group-hover:text-brand-orange">
+                        ContractCheck
+                    </span>
+                </a>
+            </div>
+
+            <!-- Login Card -->
+            <div class="glass-card rounded-3xl p-8 md:p-10 animate-fade-in-up">
+                <h1 class="text-2xl font-bold text-white mb-2 text-center">С возвращением!</h1>
+                <p class="text-gray-400 text-center mb-8 text-sm">Войдите, чтобы продолжить работу с договорами</p>
+
+                <form class="space-y-5" id="login-form">
+                    <div>
+                        <label for="login_input" class="block text-sm font-medium text-gray-400 mb-2">Логин или
+                            Email</label>
+                        <input type="text" id="login_input" required
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange/50 focus:bg-white/10 transition"
+                            placeholder="username или name@company.com">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="password" class="block text-sm font-medium text-gray-400">Пароль</label>
+                            <a href="forgot-password.html"
+                                class="text-xs text-brand-orange hover:text-white transition">Забыли пароль?</a>
+                        </div>
+                        <div class="relative">
+                            <input type="password" id="password" required
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange/50 focus:bg-white/10 transition pr-10"
+                                placeholder="••••••••">
+                            <button type="button"
+                                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white"
+                                onclick="togglePassword('password', this)">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="error-message" class="text-red-500 text-sm hidden text-center"></div>
+
+                    <button type="submit"
+                        class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold tracking-wide shadow-lg shadow-brand-orange/20 hover:shadow-brand-orange/40 transform hover:-translate-y-0.5 transition duration-200">
+                        Войти
+                    </button>
+                </form>
+
+                <script src="js/config.js"></script>
+                <script src="js/auth.js"></script>
+                <script>
+                    document.getElementById('login-form').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const loginInput = document.getElementById('login_input').value;
+                        const password = document.getElementById('password').value;
+                        const errorDiv = document.getElementById('error-message');
+
+                        try {
+                            errorDiv.classList.add('hidden');
+                            await auth.login(loginInput, password);
+                        } catch (err) {
+                            errorDiv.textContent = err.message;
+                            errorDiv.classList.remove('hidden');
+                        }
+                    });
+
+                    // Set dynamic social login links
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const code = urlParams.get('code');
+                        const error = urlParams.get('error');
+
+                        if (code) {
+                            handleSocialCallback(code);
+                        }
+
+                        if (error) {
+                            const errorDiv = document.getElementById('error-message');
+                            errorDiv.textContent = 'Ошибка авторизации через социальную сеть';
+                            errorDiv.classList.remove('hidden');
+                        }
+
+                        const googleLink = document.getElementById('google-login-link');
+                        if (googleLink) {
+                            googleLink.href = auth.getGoogleLoginUrl();
+                        }
+
+                        const yandexLink = document.getElementById('yandex-login-link');
+                        // Яндекс Client ID - укажите свой ID из консоли Яндекс OAuth
+                        const YANDEX_CLIENT_ID = 'affcd5633cb140a2953ce2c468056e94';
+                        const YANDEX_REDIRECT_URI = window.location.origin + window.location.pathname;
+
+                        if (yandexLink) {
+                            yandexLink.href = `https://oauth.yandex.ru/authorize?` +
+                                `response_type=code&` +
+                                `force_confirm=yes&` +
+                                `client_id=${YANDEX_CLIENT_ID}&` +
+                                `redirect_uri=${encodeURIComponent(YANDEX_REDIRECT_URI)}`;
+                            yandexLink.addEventListener('click', () => localStorage.setItem('cc_social_provider', 'yandex'));
+                        }
+
+                        if (googleLink) {
+                            googleLink.addEventListener('click', () => localStorage.setItem('cc_social_provider', 'google'));
+                        }
+                    });
+
+                    async function handleSocialCallback(code) {
+                        const errorDiv = document.getElementById('error-message');
+                        errorDiv.classList.remove('hidden');
+                        const provider = localStorage.getItem('cc_social_provider');
+
+                        try {
+                            // Очищаем URL
+                            window.history.replaceState({}, document.title, window.location.pathname);
+
+                            if (provider) {
+                                errorDiv.textContent = `Авторизация в ${provider}...`;
+                                await auth.socialLogin(provider, code);
+                                localStorage.removeItem('cc_social_provider');
+                            } else {
+                                // Если провайдер неизвестен, пробуем по очереди
+                                try {
+                                    errorDiv.textContent = 'Авторизация в Google...';
+                                    await auth.socialLogin('google', code);
+                                } catch (err) {
+                                    errorDiv.textContent = 'Авторизация в Яндекс...';
+                                    await auth.socialLogin('yandex', code);
+                                }
+                            }
+                        } catch (err) {
+                            errorDiv.textContent = 'Ошибка: ' + (err.message || 'Не удалось войти через соцсеть');
+                            console.error('Social callback error:', err);
+                        }
+                    }
+                </script>
+
+                <div class="my-6 flex items-center gap-4">
+                    <div class="h-px bg-white/10 flex-grow"></div>
+                    <span class="text-xs text-gray-500 uppercase">Или</span>
+                    <div class="h-px bg-white/10 flex-grow"></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="#" id="google-login-link"
+                        class="flex flex-col items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 transition text-[10px] font-medium text-white group"
+                        title="Google">
+                        <div class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                        </div>
+                        <span>Google</span>
+                    </a>
+                    <a href="#" id="yandex-login-link"
+                        class="flex flex-col items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 transition text-[10px] font-medium text-white"
+                        title="Яндекс">
+                        <div class="w-10 h-10 flex items-center justify-center bg-[#FF0000] rounded-full shadow-lg">
+                            <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 6h4v20h-4v-8.5h-3.5l-2.5 8.5H9l3-9.5c-2.5-0.5-4-2.5-4-5.5 0-3.5 3-5 6.5-5h4.5zm0 7.5V10h-3.5c-2 0-3 0.5-3 2s1 2 3 2h3.5z"
+                                    fill="white" />
+                            </svg>
+                        </div>
+                        <span>Яндекс</span>
+                    </a>
+                </div>
+
+                <p class="text-center text-gray-500 text-xs mt-8">
+                    Нет аккаунта? <a href="register.html"
+                        class="text-brand-orange hover:text-white transition">Зарегистрироваться</a>
+                </p>
+            </div>
+
+            <div class="text-center mt-6 text-gray-600 text-xs">
+                &copy; 2026 ContractCheck. <a href="#" class="hover:text-gray-400">Privacy</a> & <a href="#"
+                    class="hover:text-gray-400">Terms</a>
+            </div>
+
+        </div>
+
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+@layer utilities {
+
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    /* Top Gradient Line via Pseudo-element */
+    .glass-header {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        /* No hover animations */
+    }
+
+    .table-row-static {
+        transition: background-color 0.2s ease;
+    }
+
+    .table-row-static:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Top Gradient Line via Pseudo-element (Featured Only) */
+    .glass-card.featured::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #FF8C42 0%, #FF2E2E 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 10;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 140, 66, 0.5);
+        /* Brand Orange */
+        box-shadow: 0 20px 50px -10px rgba(255, 140, 66, 0.15);
+        /* Orange Glow */
+    }
+
+    .glass-card.featured:hover::before {
+        opacity: 1;
+    }
+
+    /* Animate button on card hover */
+    .glass-card:hover button {
+        background: linear-gradient(90deg, #FF8C42 0%, #FF2E2E 100%);
+        border-color: transparent;
+        box-shadow: 0 10px 20px -5px rgba(255, 140, 66, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Featured Card State (Always active) */
+    .glass-card.featured {
+        border-color: rgba(255, 140, 66, 0.5);
+        box-shadow: 0 20px 50px -10px rgba(255, 140, 66, 0.15);
+        transform: translateY(-10px) scale(1.02);
+    }
+
+    .glass-card.featured::before {
+        opacity: 1;
+    }
+
+    .text-glow {
+        text-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+    }
+
+    .orange-glow {
+        box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.3);
+    }
+
+    .orange-gradient-text {
+        background: linear-gradient(135deg, #FF8C42 0%, #FF2E2E 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .grid-bento {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(2, minmax(200px, auto));
+        gap: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px) rotate(-6deg);
+        }
+
+        50% {
+            transform: translateY(-10px) rotate(-6deg);
+        }
+    }
+
+    @keyframes float-reverse {
+
+        0%,
+        100% {
+            transform: translateY(0px) rotate(6deg);
+        }
+
+        50% {
+            transform: translateY(10px) rotate(6deg);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        /* Hidden by default */
+    }
+
+    .animate-float-slow {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-reverse-slow {
+        animation: float-reverse 7s ease-in-out infinite;
+    }
+
+    @keyframes pulse-scale {
+
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+    }
+
+    .animate-pulse-scale {
+        animation: pulse-scale 3s ease-in-out infinite;
+    }
+
+    .delay-100 {
+        animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+        animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+        animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+        animation-delay: 0.4s;
+    }
+
+    .delay-500 {
+        animation-delay: 0.5s;
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f0f11;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (max-width: 768px) {
+    #documents-table thead {
+        display: none;
+    }
+
+    #documents-table,
+    #documents-table tbody,
+    #documents-table tr,
+    #documents-table td {
+        display: block;
+        width: 100%;
+    }
+
+    #documents-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 1rem;
+        position: relative;
+    }
+
+    #documents-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    #documents-table td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    #documents-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: #9CA3AF;
+        margin-right: 1rem;
+    }
+
+    /* Document Name Styling - Headline Style */
+    #documents-table td[data-label="Документ"] {
+        display: block;
+        text-align: left;
+        padding-top: 0;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #documents-table td[data-label="Документ"]::before {
+        display: none;
+    }
+
+    /* Action Buttons Alignment */
+    #documents-table td[data-label="Действие"] {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Global Container Padding */
+    main {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Navbar Adjustments for 320px */
+    .glass-header {
+        padding: 0.75rem 0.75rem !important;
+        /* Tighter padding */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        /* Ensure minimal gap */
+        flex-wrap: wrap;
+        /* Allow wrap if absolutely necessary */
+    }
+
+    /* Logo Size */
+    .glass-header .font-display {
+        font-size: 1.1rem !important;
+        /* Smaller logo */
+    }
+
+    /* Nav Button Mobile */
+    nav a[href="login.html"],
+    nav a[href="dashboard.html"],
+    .glass-header button,
+    .glass-header a.bg-white\/5 {
+        padding: 0.4rem 0.75rem !important;
+        font-size: 0.75rem !important;
+        /* Smaller button text */
+    }
+
+    /* Header Adjustments */
+    .glass-header h1 {
+        font-size: 1.75rem !important;
+        /* Smaller title */
+        line-height: 1.2;
+    }
+
+    .glass-header h2 {
+        font-size: 1.5rem !important;
+    }
+
+    /* Card Padding Reduction */
+    .glass-card {
+        padding: 1rem !important;
+        /* Reduce from p-6/p-8 */
+    }
+
+    /* Stats Grid Gap */
+    .grid-cols-1 {
+        gap: 1rem !important;
+    }
+
+    /* Table Card Adjustments */
+    #documents-table tr {
+        padding: 0.75rem;
+    }
+
+    #documents-table td {
+        padding: 0.5rem 0;
+        font-size: 0.8125rem;
+        /* Smaller text 13px */
+    }
+
+    #documents-table td::before {
+        font-size: 0.65rem;
+        /* Smaller label */
+    }
+
+    /* Upload Zone on Mobile */
+    #drop-zone {
+        height: 10rem !important;
+        /* Matches h-40 */
+    }
+
+    /* Hide less important info if really needed, or just stack tighter */
+}

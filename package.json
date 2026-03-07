@@ -1,0 +1,26 @@
+{
+  "name": "contractcheck",
+  "version": "1.0.0",
+  "description": "Юридический ИИ-ассистент для анализа договоров и контрактов.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./frontend/css/input.css -o ./frontend/css/output.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LIDERWAR/ContractCheck.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LIDERWAR/ContractCheck/issues"
+  },
+  "homepage": "https://github.com/LIDERWAR/ContractCheck#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.17"
+  }
+}

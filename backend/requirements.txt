@@ -1,0 +1,32 @@
+django>=5.0
+django-jazzmin
+djangorestframework
+django-cors-headers
+python-dotenv
+pymupdf
+openai
+requests
+python-docx
+# pywin32 - только для Windows (конвертация .doc), НЕ устанавливать на Linux-сервере
+
+# Продакшн
+gunicorn>=21.0
+psycopg2-binary>=2.9
+dj-database-url>=2.1.0
+
+# Celery + Redis
+celery>=5.3
+redis>=5.0
+django-celery-results>=2.5
+
+# Auth
+django-allauth>=0.61.1
+PyJWT
+cryptography
+dj-rest-auth>=5.0.2
+# OCR
+easyocr
+opencv-python-headless
+torch
+torchvision
+yookassa>=3.0.0

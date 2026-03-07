@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реквизиты и контакты - ContractCheck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #E2E2E2;
+        }
+
+        .glass-card {
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen py-12 px-4">
+    <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-3xl">
+        <a href="index.html" class="inline-flex items-center text-brand-orange hover:underline mb-8">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                </path>
+            </svg>
+            Вернуться на главную
+        </a>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-8">Реквизиты и контакты</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-white mb-4">Юридическая информация</h2>
+                <div class="space-y-4 text-gray-400">
+                    <div>
+                        <span class="block text-white font-medium">Наименование:</span>
+                        ИП [Ваше ФИО / Название организации]
+                    </div>
+                    <div>
+                        <span class="block text-white font-medium">ИНН:</span>
+                        [Ваш ИНН]
+                    </div>
+                    <div>
+                        <span class="block text-white font-medium">ОГРНИП:</span>
+                        [Ваш ОГРНИП]
+                    </div>
+                    <div>
+                        <span class="block text-white font-medium">Юридический адрес:</span>
+                        [Ваш адрес]
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-white mb-4">Контактные данные</h2>
+                <div class="space-y-4 text-gray-400">
+                    <div>
+                        <span class="block text-white font-medium">Email поддержка:</span>
+                        <a href="mailto:support@contractcheck.ru" class="text-brand-orange">support@contractcheck.ru</a>
+                    </div>
+                    <div>
+                        <span class="block text-white font-medium">По вопросам сотрудничества:</span>
+                        <a href="mailto:admin@contractcheck.ru" class="text-brand-orange">admin@contractcheck.ru</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-brand-orange/10 border border-brand-orange/20 rounded-2xl">
+            <p class="text-sm text-gray-300">
+                <span class="font-bold text-brand-orange">Важно:</span> Пожалуйста, обновите данные в квадратных скобках
+                [ ] на ваши актуальные реквизиты перед финальным деплоем, так как это обязательное требование ЮKassa для
+                активации магазина.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Основные SEO теги -->
+    <title>Распознавание и аудит договоров по фото (OCR) | Анализ сканов онлайн</title>
+    <meta name="description"
+        content="Загрузите фото договора или скан в JPG/PNG и получите юридический анализ. Наш ИИ распознает текст и проверит его на риски. Поддержка всех форматов.">
+    <meta name="keywords"
+        content="проверка договора онлайн, аудит договора нейросетью, ai юрист, анализ контракта ии, протокол разногласий, проверка на риски договор, юридическая проверка контракта, contract check, дипсик юрист">
+    <meta name="author" content="ContractCheck.ru">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Настройки для соцсетей и мессенджеров -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://contractcheck.ru/">
+    <meta property="og:title" content="ContractCheck - ИИ-юрист для анализа договоров">
+    <meta property="og:description"
+        content="Загрузите договор и получите полный отчет о рисках и кабальных условиях за 10 секунд. Без выходных, 24/7. Дешевле обычного юриста в 10 раз.">
+    <meta property="og:image" content="https://contractcheck.ru/images/og-image.png">
+    <meta property="og:site_name" content="ContractCheck">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Unbounded', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#FF8C42',
+                            red: '#FF2E2E',
+                            dark: '#050505',
+                            card: '#0A0A0B',
+                            light: '#E2E2E2'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Безопасно ли загружать документы?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Абсолютно. Все данные защищены банковским шифрованием (SSL). Загруженные файлы автоматически удаляются с наших серверов сразу после проверки и не используются для обучения AI. Мы полностью соблюдаем все нормы конфиденциальности и NDA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какие форматы вы поддерживаете?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Мы поддерживаем большинство популярных форматов: PDF (включая сканы), Microsoft Word (DOCX/DOC), обычный текст (TXT), а также изображения договоров в форматах JPG и PNG."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Насколько точен анализ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Наш ИИ обучен на актуальной базе законодательства РФ (ГК РФ, НК РФ) и судебной практике за 2024–2025 годы. Система настроена на поиск более 1000 различных юридических рисков и скрытых ловушек, что позволяет достигать точности, сопоставимой с квалифицированным юристом."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="bg-brand-dark text-brand-light min-h-screen flex flex-col font-sans selection:bg-brand-orange/30">
+
+    <!-- Navbar -->
+    <nav
+        class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-white/5 glass-header sticky top-0 z-50">
+        <a href="index.html" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+            <img src="images/favicons/logo-icon.png" alt="Logo" class="w-8 h-8 object-contain">
+            <div
+                class="hidden sm:block text-2xl font-display font-bold text-white transition-colors group-hover:text-brand-orange">
+                ContractCheck
+            </div>
+        </a>
+        <div class="hidden lg:flex gap-8 text-sm font-medium">
+            <a href="index.html" class="nav-link hover:text-brand-orange transition-colors duration-200">Главная</a>
+            <a href="how-it-works.html" class="nav-link hover:text-brand-orange transition-colors duration-200">Как это
+                работает</a>
+            <a href="check-it-contract.html"
+                class="nav-link hover:text-brand-orange transition-colors duration-200">Умная проверка</a>
+            <a href="rent-contract-risks.html"
+                class="nav-link hover:text-brand-orange transition-colors duration-200">Анализ аренды</a>
+            <a href="contract-ocr.html"
+                class="nav-link nav-link-active text-brand-orange border-b-2 border-brand-orange pb-1">OCR проверка</a>
+            <a href="index.html#pricing"
+                class="nav-link hover:text-brand-orange transition-colors duration-200">Цены</a>
+        </div>
+        <div id="auth-nav-container" class="flex items-center gap-2 sm:gap-4">
+            <a href="login.html"
+                class="bg-white/5 hover:bg-white/10 text-white px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition backdrop-blur-md border border-white/5 hover:border-brand-orange/30">
+                Войти
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Hero Section (Bento Grid) -->
+    <main class="w-full max-w-7xl mx-auto px-4 py-8 md:py-12 relative z-10">
+
+        <!-- Header Text -->
+        <div class="mb-12 text-center md:text-left">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold mb-6 tracking-wider uppercase">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                Технология OCR нового поколения
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-display font-bold leading-tight mb-6 text-white max-w-4xl">
+                От <span class="text-indigo-500">фотографии</span> <br>
+                до юридического <span class="orange-gradient-text text-glow">отчета</span>
+            </h1>
+            <p class="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed">
+                Просто сфотографируйте договор на камеру телефона. Наш ИИ мгновенно распознает текст, даже если снимок
+                сделан под углом или при плохом освещении, и проверит его на юридическую чистоту.
+            </p>
+        </div>
+
+        <!-- OCR Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[minmax(200px,auto)] mb-24">
+
+            <!-- Card 1: Intelligent OCR -->
+            <div
+                class="col-span-1 md:col-span-6 glass-card rounded-3xl p-8 relative overflow-hidden group border-indigo-500/20">
+                <div
+                    class="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Умное распознавание</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Поддержка 100+ языков и сложных шрифтов. Распознаем даже рукописные правки на полях документа.
+                </p>
+            </div>
+
+            <!-- Card 2: Correction & Clarity -->
+            <div
+                class="col-span-1 md:col-span-6 glass-card rounded-3xl p-8 relative overflow-hidden group border-brand-orange/20">
+                <div
+                    class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-brand-orange mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Автокоррекция</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    ИИ автоматически выравнивает заваленный горизонт, убирает шумы и повышает контрастность для
+                    безошибочного анализа.
+                </p>
+            </div>
+
+            <!-- Card 3: Instant Feedback -->
+            <div
+                class="col-span-1 md:col-span-8 glass-card rounded-3xl p-8 relative overflow-hidden group flex items-center border-blue-500/20">
+                <div class="w-2/3">
+                    <h3 class="text-2xl font-bold text-white mb-3">Мгновенная оцифровка</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Преобразуйте бумажный договор в редактируемый формат .docx или защищенный PDF с результатами
+                        анализа всего за 10 секунд.
+                    </p>
+                </div>
+                <div class="w-1/3 flex justify-end">
+                    <div class="w-32 h-32 bg-indigo-500/10 flex items-center justify-center rounded-full animate-pulse">
+                        <svg class="w-16 h-16 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Security -->
+            <div
+                class="col-span-1 md:col-span-4 glass-card rounded-3xl p-8 relative overflow-hidden group border-emerald-500/20">
+                <h3 class="text-xl font-bold text-white mb-4 italic">No Logs Policy</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Ваши фото не сохраняются в галерее сервера и удаляются сразу после генерации текста. Безопасно как в
+                    швейцарском банке.
+                </p>
+                <div class="mt-8">
+                    <div class="h-1 w-full bg-emerald-500/20 rounded-full overflow-hidden">
+                        <div class="w-full h-full bg-emerald-500 animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- How It Works / Process Section -->
+        <section id="how-it-works" class="mb-24 reveal">
+            <div
+                class="glass-card rounded-3xl p-8 md:p-12 border border-brand-orange/20 relative overflow-hidden group">
+                <div
+                    class="absolute -right-24 -bottom-24 w-64 h-64 bg-brand-orange/10 rounded-full blur-3xl group-hover:bg-brand-orange/20 transition-all duration-700">
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                    <div class="max-w-2xl text-center md:text-left">
+                        <h2 class="text-2xl md:text-4xl font-display font-bold text-white mb-4">
+                            Как это <span class="orange-gradient-text">работает?</span>
+                        </h2>
+                        <p class="text-gray-400 text-base md:text-lg">
+                            От загрузки документа до подробного отчета о рисках — всего 3 простых шага. Мы используем
+                            передовые ИИ-технологии для вашей юридической безопасности.
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <a href="how-it-works.html"
+                            class="inline-flex items-center px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl border border-white/10 hover:border-brand-orange/50 transition-all group/btn">
+                            Узнать подробнее
+                            <svg class="w-5 h-5 ml-3 group-hover/btn:translate-x-1 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section (Compact) -->
+        <section id="pricing" class="mb-24 reveal">
+            <div class="glass-card rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-brand-orange/5 blur-3xl"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl md:text-4xl font-display font-bold mb-6">Готовы <span
+                            class="orange-gradient-text">начать?</span></h2>
+                    <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                        У нас есть гибкие тарифы для любых задач: от разовой проверки до безлимитного PRO-аккаунта для
+                        бизнеса.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="index.html#pricing"
+                            class="px-8 py-4 bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold rounded-xl hover:scale-105 transition shadow-lg shadow-brand-orange/20">
+                            Посмотреть все тарифы
+                        </a>
+                        <a href="login.html"
+                            class="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-medium rounded-xl transition border border-white/5">
+                            Личный кабинет
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section (Compact) -->
+        <section id="faq" class="mb-24 reveal">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl md:text-4xl font-display font-bold mb-6">Остались <span
+                        class="orange-gradient-text">вопросы?</span></h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    Мы собрали ответы на самые популярные вопросы о безопасности, точности AI и форматах документов в
+                    нашем большом разделе помощи.
+                </p>
+                <a href="index.html#faq"
+                    class="inline-flex items-center gap-2 text-brand-orange font-bold hover:gap-3 transition-all underline underline-offset-8 decoration-brand-orange/30 hover:decoration-brand-orange">
+                    Читать полный FAQ
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/5 pt-12 pb-8 text-center text-gray-500 text-sm">
+            <div class="flex flex-wrap justify-center gap-6 mb-4">
+                <a href="user-agreement.html" class="hover:text-white transition">Пользовательское соглашение</a>
+                <a href="privacy-policy.html" class="hover:text-white transition">Политика конфиденциальности</a>
+                <a href="requisites.html" class="hover:text-white transition">Реквизиты и контакты</a>
+            </div>
+            <p>&copy; 2026 ContractCheck. Все права защищены.</p>
+        </footer>
+
+    </main>
+
+    <!-- Results Modal / Section (Hidden initially) -->
+    <div id="results-section" class="hidden fixed inset-0 z-50 bg-brand-dark/95 backdrop-blur-xl overflow-y-auto">
+        <div class="min-h-screen px-4 py-8 flex items-center justify-center">
+            <div
+                class="w-full max-w-4xl bg-[#1e293b] rounded-3xl border border-white/10 shadow-2xl overflow-hidden relative">
+
+                <!-- Close Button -->
+                <button id="close-results"
+                    class="absolute top-6 right-6 text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+
+                <div class="p-4 sm:p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                        <div>
+                            <h2 class="text-xl sm:text-3xl font-display font-bold text-white mb-2">Результат Аудита
+                            </h2>
+                            <p class="text-gray-400" id="analysis-time-display">Проверка завершена <span
+                                    id="page-count-display"></span></p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <div class="text-sm text-gray-400">Оценка безопасности</div>
+                                <div id="score-value" class="text-3xl sm:text-4xl font-bold text-green-400">85/100</div>
+                            </div>
+                            <div id="score-icon-container"
+                                class="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-4 border-green-400 flex items-center justify-center text-green-400 flex-shrink-0">
+                                <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Auto-save notification -->
+                        <div id="save-notice"
+                            class="flex items-center gap-2 text-sm text-brand-orange bg-brand-orange/10 px-4 py-2 rounded-xl inline-flex">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+                                </path>
+                            </svg>
+                            Копия отчета сохранена в ваш Личный архив
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="bg-white/5 rounded-2xl p-6 border border-white/5">
+                            <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                                <span class="bg-brand-orange/20 text-brand-orange p-1 rounded-lg">🤖</span>
+                                Вердикт AI
+                            </h3>
+                            <p id="summary-text" class="text-gray-300 leading-relaxed">
+                                Договор в целом стандартный, но содержит пункт о праве арендодателя поднять цену без
+                                уведомления. Рекомендуется пересмотреть пункт 4.2.
+                            </p>
+                        </div>
+
+                        <!-- Guest Promo Banner (Hidden by default, shown by JS) -->
+                        <div id="guest-promo-banner"
+                            class="hidden bg-gradient-to-r from-brand-orange/10 to-brand-red/10 border border-brand-orange/30 rounded-2xl p-4 sm:p-6 mb-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Хотите увидеть все риски?</h3>
+                            <p class="text-gray-300 mb-4 text-sm leading-relaxed">Зарегистрируйтесь, чтобы получить
+                                полный доступ к найденным рискам, подробным рекомендациям по их устранению и возможности
+                                скачать готовый безопасный документ.</p>
+                            <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                                <a href="register.html"
+                                    class="w-full sm:w-auto text-center px-4 sm:px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-orange to-brand-red text-white text-sm sm:text-base font-bold transition shadow-lg shadow-brand-orange/20 hover:scale-105 select-none">Зарегистрироваться</a>
+                                <a href="login.html"
+                                    class="w-full sm:w-auto text-center px-4 sm:px-6 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-sm sm:text-base font-medium transition border border-white/10 select-none">Войти</a>
+                            </div>
+                        </div>
+
+                        <!-- Risks -->
+                        <div>
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                                <h3 class="text-lg font-bold text-white">Найденные риски</h3>
+                                <span class="text-xs text-gray-500">Все замечания подкреплены ссылками на статьи ГК
+                                    РФ</span>
+                            </div>
+                            <div id="risks-container" class="space-y-4">
+                                <!-- Risk Item Template -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-8 pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-end gap-4 relative z-10 pb-16 sm:pb-0">
+                        <button id="download-pdf-btn"
+                            class="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium transition border border-white/5">
+                            Скачать PDF
+                        </button>
+                        <button id="consult-btn"
+                            class="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-gradient-to-r from-brand-orange to-brand-red text-white font-medium transition shadow-lg shadow-brand-orange/20 hover:shadow-brand-orange/40">
+                            Консультация юриста
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script defer src="js/auth.js?v=5"></script>
+    <script defer src="js/main.js?v=5"></script>
+</body>
+
+</html>

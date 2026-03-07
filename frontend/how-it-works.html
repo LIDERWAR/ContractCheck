@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Основные SEO теги -->
+    <title>Как работает ContractCheck | ИИ-анализ юридических рисков</title>
+    <meta name="description"
+        content="Узнайте, как нейросети ContractCheck анализируют ваши договоры. 3 простых шага к юридической безопасности: загрузка, AI-аудит и подробный отчет о рисках.">
+    <meta name="keywords"
+        content="как работает ai юрист, технология анализа договоров, нейросеть для юристов, юридический аудит алгоритм">
+    <meta name="author" content="ContractCheck.ru">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://contractcheck.ru/how-it-works.html">
+    <meta property="og:title" content="Как работает ContractCheck - Технология ИИ-аудита">
+    <meta property="og:description"
+        content="Подробный разбор технологии анализа договоров. От OCR распознавания до поиска скрытых ловушек нейросетью.">
+    <meta property="og:image" content="https://contractcheck.ru/images/og-image.png">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body class="bg-brand-dark text-brand-light min-h-screen flex flex-col font-sans selection:bg-brand-orange/30">
+
+    <!-- Navbar Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="w-full max-w-7xl mx-auto px-4 py-8 md:py-12 relative z-10">
+
+        <!-- Hero Title -->
+        <div class="mb-16 text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-display font-bold leading-tight mb-6 text-white">
+                Технология <span class="orange-gradient-text">умного анализа</span>
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto text-base md:text-lg">
+                Мы объединили мощь современных нейросетей с экспертизой ведущих юристов, чтобы вы могли проверять
+                договоры за секунды, а не часы.
+            </p>
+        </div>
+
+        <!-- How It Works / Process Section -->
+        <section id="how-it-works" class="mb-24">
+            <div class="flex flex-col gap-8 md:gap-12">
+                <!-- Step 1: Upload -->
+                <div
+                    class="glass-card rounded-3xl p-6 md:p-12 relative overflow-hidden group hover:border-brand-orange/50 transition duration-300 flex flex-col md:flex-row items-center gap-8 md:gap-16 text-center md:text-left">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-brand-orange/10 rounded-full blur-3xl"></div>
+
+                    <!-- Text Content -->
+                    <div class="w-full md:w-1/2 relative z-10 md:order-1 flex flex-col items-center md:items-start">
+                        <div
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 flex items-center justify-center text-gray-500 font-bold text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-brand-orange/20 group-hover:text-brand-orange group-hover:scale-110 transition duration-300">
+                            1</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">Загрузите документ</h3>
+                        <p class="text-gray-400 text-base md:text-lg leading-relaxed">Загрузите договор (PDF, Word,
+                            TXT) и
+                            распознайте даже фото или некачественные сканы. Мы принимаем файлы весом до 10MB.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 mt-6 md:mt-8 mb-8 sm:mb-0 w-full md:w-auto">
+                            <button type="button" onclick="document.getElementById('file-input').click()"
+                                class="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold rounded-xl hover:scale-105 transition shadow-lg shadow-brand-orange/20 z-20">
+                                Выбрать файл
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Visual / Interactive Zone -->
+                    <div class="w-full md:w-1/2 relative z-10 md:order-2">
+                        <!-- Mini Upload Zone -->
+                        <div id="drop-zone"
+                            class="w-full min-h-[14rem] md:min-h-0 md:h-64 py-6 md:py-0 border-2 border-dashed border-white/10 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:bg-white/5 hover:border-brand-orange transition group/upload relative backdrop-blur-sm bg-black/20">
+                            <div
+                                class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover/upload:scale-110 transition">
+                                <svg class="w-6 h-6 md:w-8 md:h-8 text-gray-400 group-hover/upload:text-brand-orange transition"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <!-- Mobile Cam Icon (visible on mobile, hidden on sm+) -->
+                                    <path class="block sm:hidden" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                                    </path>
+                                    <path class="block sm:hidden" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+
+                                    <!-- Desktop Plus Icon (hidden on mobile, visible on sm+) -->
+                                    <path class="hidden sm:block" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-400 font-medium hidden sm:block">перетащите файл сюда</span>
+
+                            <!-- Mobile Action Button -->
+                            <div class="sm:hidden flex flex-col items-center gap-2 px-2 text-center w-full z-10">
+                                <span
+                                    class="text-xs leading-tight text-gray-400 font-medium break-words px-4">перетащите
+                                    файл сюда</span>
+                                <span
+                                    class="text-[10px] sm:text-xs text-gray-500 mt-1 mb-2 text-center px-4 uppercase font-bold tracking-wider">
+                                    PDF, WORD, TXT
+                                </span>
+                                <div
+                                    class="px-5 py-2.5 bg-gradient-to-r from-brand-orange to-brand-red text-white text-xs font-bold rounded-xl shadow-[0_0_15px_rgba(255,140,66,0.3)] pointer-events-none">
+                                    выбрать файл
+                                </div>
+                            </div>
+
+                            <!-- Step 1 Uploading State -->
+                            <div id="uploading-state"
+                                class="hidden absolute inset-0 bg-brand-dark/95 backdrop-blur-md rounded-3xl flex flex-col items-center justify-center z-20 transition-all duration-300">
+
+                                <div class="relative w-12 h-12 md:w-16 md:h-16 mb-4">
+                                    <div class="absolute inset-0 rounded-full border-4 border-brand-orange/30"></div>
+                                    <div
+                                        class="absolute inset-0 rounded-full border-4 border-brand-orange border-t-transparent animate-spin">
+                                    </div>
+                                </div>
+
+                                <h4 class="text-white font-bold text-sm mb-4">Загрузка документа...</h4>
+
+                                <div
+                                    class="w-full max-w-[80%] bg-white/10 rounded-full h-1.5 overflow-hidden border border-white/5 mx-4 mb-2 flex-shrink-0">
+                                    <div id="step1-progress-bar-fill"
+                                        class="bg-gradient-to-r from-brand-orange to-brand-red h-full rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,107,0,0.4)]"
+                                        style="width: 0%"></div>
+                                </div>
+                                <div class="flex flex-col items-center flex-shrink-0">
+                                    <span id="step1-progress-text"
+                                        class="text-brand-orange text-[10px] font-bold">0%</span>
+                                    <span id="step1-detail-status"
+                                        class="text-gray-400 text-[9px] mt-1 italic">Подготовка...</span>
+                                </div>
+                            </div>
+
+                            <!-- File Inupts -->
+                            <input type="file" id="file-input"
+                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-30"
+                                accept=".pdf,.docx,.doc,.txt,.jpg,.jpeg,.png" multiple>
+                            <input type="file" id="camera-input" class="hidden" accept="image/*" capture="camera">
+                        </div>
+
+                        <!-- Trust Badge for NDA and Security -->
+                        <div
+                            class="mt-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                            <div class="p-2 rounded-full bg-green-500/20 text-green-400 sm:mt-1">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm mb-1.5 sm:mb-1">100% Конфиденциально</h4>
+                                <p class="text-gray-400 text-xs">Все данные защищены банковским шифрованием (SSL).
+                                    Загруженные файлы автоматически удаляются с наших серверов сразу после проверки и не
+                                    используются для обучения AI. Все сотрудники соблюдают NDA.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Analysis -->
+                <div
+                    class="glass-card rounded-3xl p-6 md:p-12 relative overflow-hidden group hover:border-brand-orange/50 transition duration-300 flex flex-col items-center text-center md:text-left">
+
+                    <!-- Content Wrapper for Flex Layout -->
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full mb-2">
+                        <!-- Text Content -->
+                        <div class="w-full md:w-1/2 md:order-1 flex flex-col items-center md:items-start">
+                            <div
+                                class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 flex items-center justify-center text-gray-500 font-bold text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-brand-orange/20 group-hover:text-brand-orange group-hover:scale-110 transition duration-300">
+                                2</div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">AI Анализ</h3>
+                            <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-6">Наша нейросеть сканирует
+                                текст
+                                договора,
+                                сверяет его со <span class="text-white/80 font-medium">свежими обновлениями
+                                    законодательства (ГК
+                                    РФ, ТК
+                                    РФ) и судебной практикой 2024–2025 года.</span>
+                                Выявляет "подводные камни" и подозрительные пункты по более чем 1000 параметрам
+                                юридического анализа.</p>
+
+                            <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                                <span
+                                    class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300">Поиск
+                                    скрытых штрафов</span>
+                                <span
+                                    class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300">Проверка
+                                    ответственности</span>
+                                <span
+                                    class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300">Условия
+                                    прекращения договора</span>
+                            </div>
+                        </div>
+
+                        <!-- Visual Icon - Clean & Animated -->
+                        <div class="w-full md:w-1/2 md:order-2 flex-shrink-0 min-h-[14rem] md:h-64 bg-black/40 rounded-3xl flex items-center justify-center relative overflow-hidden group/icon border border-white/5 shadow-2xl transition-all duration-500 px-4 md:px-0"
+                            id="analysis-visual-container">
+
+                            <!-- Base State (Magnifying Glass) -->
+                            <div id="analysis-base-state"
+                                class="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300">
+                                <div class="absolute inset-0 bg-brand-orange/5 blur-3xl"></div>
+                                <svg class="w-20 h-20 md:w-32 md:h-32 text-brand-orange animate-pulse-scale drop-shadow-[0_0_25px_rgba(255,140,66,0.3)]"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+
+                            <!-- Active Analysis State (Transferred from Drop Zone) -->
+                            <div id="loading-state"
+                                class="absolute inset-0 flex flex-col items-center justify-center z-20 transition-opacity duration-500 opacity-0 pointer-events-none bg-brand-dark/95 backdrop-blur-md rounded-3xl border border-brand-orange/20 p-6">
+
+                                <div
+                                    class="relative w-16 h-16 md:w-20 md:h-20 mb-6 flex-shrink-0 flex items-center justify-center aspect-square">
+                                    <div class="absolute inset-0 rounded-full border-4 border-brand-orange/30"></div>
+                                    <div
+                                        class="absolute inset-0 rounded-full border-4 border-brand-orange border-t-transparent animate-spin">
+                                    </div>
+                                    <div class="flex items-center justify-center">
+                                        <span class="text-sm text-white font-mono font-bold">AI</span>
+                                    </div>
+                                </div>
+
+                                <span id="loading-text"
+                                    class="text-base md:text-lg text-brand-orange font-medium animate-pulse mb-4 text-center px-4 flex-shrink-0">Запускаем
+                                    нейросеть...</span>
+
+                                <div
+                                    class="w-full max-w-[80%] bg-white/10 rounded-full h-2.5 overflow-hidden border border-white/5 mx-4 mb-2 flex-shrink-0 shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)]">
+                                    <div id="progress-bar-fill"
+                                        class="bg-gradient-to-r from-brand-orange to-brand-red h-2.5 rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,107,0,0.4)]"
+                                        style="width: 0%"></div>
+                                </div>
+                                <div class="flex flex-col items-center flex-shrink-0">
+                                    <span id="progress-text" class="text-brand-orange text-xs font-bold mt-1">0%</span>
+                                    <span id="page-checker-status"
+                                        class="text-gray-400 text-[10px] mt-1 opacity-0 transition-opacity duration-300">Подготовка...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End of Content Wrapper -->
+
+                    <!-- Предупреждение вынесено отдельно вниз (по умолчанию скрыто) -->
+                    <p id="analysis-warning"
+                        class="hidden text-[11px] sm:text-sm text-gray-400 mt-4 text-center w-full leading-relaxed px-4">
+                        <span class="text-brand-orange/80 font-bold">Контент договора очень объемный.</span><br>
+                        Подробный отчет формируется обычно в течение 3-5 минут для больших контрактов.
+                    </p>
+                </div>
+
+                <!-- Step 3: Report -->
+                <div
+                    class="glass-card rounded-3xl p-6 md:p-12 relative overflow-hidden group hover:border-green-500/50 transition duration-300 flex flex-col md:flex-row items-center gap-8 md:gap-16 text-center md:text-left">
+
+                    <!-- Text Content -->
+                    <div class="w-full md:w-1/2 md:order-1 flex flex-col items-center md:items-start">
+                        <div
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 flex items-center justify-center text-gray-500 font-bold text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-green-500/20 group-hover:text-green-400 group-hover:scale-110 transition duration-300">
+                            3</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">Подробный Отчет</h3>
+                        <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-6">Получите понятный каждому
+                            разбор. Мы
+                            сгруппируем риски по уровню угроз, выделим пункт в контракте и предоставим рекомендации по
+                            его
+                            устранению или перефразированию.</p>
+
+                        <div class="flex flex-col sm:flex-row items-center gap-4 mb-8 sm:mb-0 text-sm text-gray-400">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Резюме юриста
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Экспорт в PDF
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Icon & Action Area (Step 3) -->
+                    <div id="result-visual-container"
+                        class="w-full md:w-1/2 md:order-2 flex-shrink-0 min-h-[14rem] sm:min-h-[12rem] md:h-64 bg-black/40 rounded-3xl flex items-center justify-center relative overflow-hidden group/icon border border-white/5 shadow-2xl transition-all duration-500">
+
+                        <!-- Base State -->
+                        <div id="result-base-state"
+                            class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
+                            <div class="absolute inset-0 bg-green-500/5 blur-3xl"></div>
+                            <svg class="w-20 h-20 md:w-32 md:h-32 text-green-400 animate-pulse-scale drop-shadow-[0_0_25px_rgba(74,222,128,0.3)]"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Action State (Hidden until analysis is done) -->
+                        <div id="result-action-state"
+                            class="hidden absolute inset-0 bg-green-500/10 backdrop-blur-sm flex flex-col items-center justify-center transition-all duration-500 z-20">
+                            <div
+                                class="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mb-4 ring-4 ring-green-500/20 animate-bounce">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-white font-bold text-lg mb-4 text-center">Анализ завершен!</h4>
+                            <button id="view-result-btn"
+                                class="w-[90%] sm:w-auto px-2 sm:px-8 py-2.5 sm:py-3 mx-auto bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition shadow-[0_0_20px_rgba(74,222,128,0.4)] text-[11px] sm:text-base whitespace-nowrap overflow-hidden text-ellipsis">
+                                Посмотреть отчет
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security & Privacy -->
+        <section class="mb-24">
+            <h2 class="text-3xl font-display font-bold text-center mb-12">Безопасность и <span
+                    class="orange-gradient-text">конфиденциальность</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-3xl border border-white/5">
+                    <div
+                        class="w-12 h-12 bg-green-500/20 text-green-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Шифрование данных</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Мы используем протоколы банковского уровня (SSL/TLS) для передачи всех файлов. Ваши документы
+                        никогда не попадают в открытый доступ.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl border border-white/5">
+                    <div
+                        class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Автоудаление</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        После завершения анализа и скачивания отчета, исходные файлы автоматически удаляются с наших
+                        серверов. Мы не обучаем ИИ на ваших персональных данных.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <div class="glass-card rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-orange/10 to-brand-red/10 animate-pulse"></div>
+            <h2 class="text-2xl md:text-4xl font-display font-bold text-white mb-6 relative z-10">Готовы обезопасить
+                свой договор?</h2>
+            <p class="text-gray-400 mb-10 relative z-10">Первые 2 страницы анализа — бесплатно в подарок.</p>
+            <button type="button" onclick="document.getElementById('file-input').click()"
+                class="inline-block px-10 py-5 bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold rounded-2xl hover:scale-105 transition shadow-2xl shadow-brand-orange/30 relative z-10">
+                Загрузить документ
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/auth.js?v=110"></script>
+    <script src="js/main.js?v=110"></script>
+</body>
+
+</html>

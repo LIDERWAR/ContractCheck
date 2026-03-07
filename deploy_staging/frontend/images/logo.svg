@@ -1,0 +1,30 @@
+<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#FF8C42;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FF5F1F;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- Glowing Orange Line -->
+    <line x1="60" y1="100" x2="380" y2="100" stroke="url(#orangeGradient)" stroke-width="4" stroke-linecap="round" filter="url(#glow)" />
+    
+    <!-- Stylized "C" Document Icon -->
+    <g fill="none" stroke="white" stroke-width="12" stroke-linejoin="round" stroke-linecap="round">
+        <!-- Top Section -->
+        <path d="M130 30 H75 L50 55 V92 H130" />
+        <!-- Bottom Section -->
+        <path d="M130 170 H75 L50 145 V108 H130" />
+    </g>
+
+    <!-- Typography (Simplified Font stack for <img> compatibility) -->
+    <style>
+        .logo-text { font-family: 'Unbounded', 'Inter', system-ui, -apple-system, sans-serif; font-weight: 700; fill: white; letter-spacing: -2px; }
+    </style>
+    <text x="145" y="88" class="logo-text" font-size="72">ontract</text>
+    <text x="145" y="168" class="logo-text" font-size="72">heck</text>
+</svg>

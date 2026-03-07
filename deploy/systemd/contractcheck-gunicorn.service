@@ -1,0 +1,23 @@
+[Unit]
+Description=Gunicorn для ContractCheck.ru Django
+After=network.target postgresql.service
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/contractcheck/backend
+ExecStart=/var/www/contractcheck/backend/venv/bin/gunicorn \
+    --config /var/www/contractcheck/backend/gunicorn.conf.py \
+    config.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RestartSec=5s
+
+EnvironmentFile=/var/www/contractcheck/backend/.env
+
+StandardOutput=append:/var/log/contractcheck/gunicorn.log
+StandardError=append:/var/log/contractcheck/gunicorn_error.log
+
+[Install]
+WantedBy=multi-user.target
