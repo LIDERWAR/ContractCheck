@@ -28,7 +28,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Document(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    file = models.FileField(upload_to='contracts/')
+    file = models.FileField(upload_to='contracts/', null=True, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=255, blank=True)
     

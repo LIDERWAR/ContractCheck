@@ -572,8 +572,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }, 1500);
             } else {
-                const errorData = JSON.parse(xhr.responseText);
-                showAlert('Ошибка загрузки', errorData.error || 'Не удалось загрузить файлы');
+                try {
+                    const errorData = JSON.parse(xhr.responseText);
+                    const msg = errorData.details ? errorData.details : (errorData.error || 'Не удалось загрузить файлы');
+                    showAlert('Ошибка загрузки', msg);
+                } catch (e) {
+                    showAlert('Ошибка загрузки', `Ошибка сервера (${xhr.status}). Попробуйте позже или обратитесь в поддержку.`);
+                }
                 resetUI();
             }
         };

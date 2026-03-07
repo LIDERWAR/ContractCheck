@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .models import Document, Transaction, UserProfile, DocumentPage
 from .serializers import DocumentSerializer, UserSerializer
-from .tasks import analyze_document_task
+from .tasks import prepare_document_task, analyze_document_task
 from yookassa import Configuration, Payment
 
 logger = logging.getLogger(__name__)
@@ -28,6 +28,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.yandex.views import YandexOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
+from rest_framework.throttling import AnonRateThrottle
 
 def verify_file_type(file_obj):
     """
@@ -156,14 +157,14 @@ class ContractAnalysisView(APIView):
             files = [request.FILES.get('file')]
         
         if not files:
-            return Response({"error": "No files provided"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Файлы не выбраны"}, status=status.HTTP_400_BAD_REQUEST)
         
         # Valid extensions and internal type verification
         valid_extensions = ['.pdf', '.docx', '.txt', '.jpg', '.jpeg', '.png']
         for file_obj in files:
             file_ext = os.path.splitext(file_obj.name)[1].lower()
             if file_ext not in valid_extensions:
-                 return Response({"error": f"Unsupported file type in '{file_obj.name}'. Supported: {', '.join(valid_extensions)}"}, status=status.HTTP_400_BAD_REQUEST)
+                 return Response({"error": f"Тип файла '{file_obj.name}' не поддерживается. Разрешены: {', '.join(valid_extensions)}"}, status=status.HTTP_400_BAD_REQUEST)
             
             # Дополнительная проверка содержимого (Security check)
             detected_ext = verify_file_type(file_obj)
@@ -195,12 +196,12 @@ class ContractAnalysisView(APIView):
             profile, created = UserProfile.objects.get_or_create(user=user)
             if profile.checks_remaining <= 0:
                  return Response({
-                     "error": "Limit reached", 
+                     "error": "Лимит исчерпан", 
                      "details": "У вас закончились доступные проверки. Пожалуйста, обновите тариф."
                  }, status=status.HTTP_403_FORBIDDEN)
             
-            # 1. Создаем заготовку документа
-            document = Document.objects.create(user=user, status='pending')
+            # 1. Создаем заготовку документа (сразу привязываем первый файл)
+            document = Document.objects.create(user=user, status='pending', file=files[0])
             
             # 2. Сохраняем все файлы как отдельные страницы
             # Это автоматически сохранит файлы в папку media/contracts/pages/
@@ -220,7 +221,7 @@ class ContractAnalysisView(APIView):
 
         except Exception as e:
             logger.error(f"Unexpected error in view: {e}")
-            return Response({"error": f"Unexpected server error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": f"Произошла непредвиденная ошибка: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class StartAnalysisView(APIView):
     permission_classes = [IsAuthenticated]
@@ -229,14 +230,14 @@ class StartAnalysisView(APIView):
         try:
             document = Document.objects.get(pk=pk, user=request.user)
             if document.status != 'awaiting_analysis':
-                return Response({"error": "Document is not ready for analysis"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error": "Документ еще не готов к анализу"}, status=status.HTTP_400_BAD_REQUEST)
             
             # Запуск ИИ анализа через Celery (не в памяти Gunicorn)
             analyze_document_task.delay(document.id)
             
-            return Response({"status": "processing", "message": "Analysis started"}, status=status.HTTP_200_OK)
+            return Response({"status": "processing", "message": "Анализ запущен"}, status=status.HTTP_200_OK)
         except Document.DoesNotExist:
-            return Response({"error": "Document not found"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "Документ не найден"}, status=status.HTTP_404_NOT_FOUND)
 
 # --- SOCIAL LOGIN VIEWS ---
 
