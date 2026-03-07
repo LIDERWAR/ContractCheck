@@ -90,3 +90,16 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"Transaction {self.id} - {self.user.username} - {self.status}"
+
+class SystemSetting(models.Model):
+    key = models.CharField(max_length=100, unique=True, verbose_name="Ключ настройки")
+    value = models.TextField(verbose_name="Значение")
+    description = models.CharField(max_length=255, blank=True, verbose_name="Описание")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Системная настройка"
+        verbose_name_plural = "Системные настройки"
+
+    def __str__(self):
+        return self.key

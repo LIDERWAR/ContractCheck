@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.utils.html import format_html
-from .models import UserProfile, Document, Transaction
+from .models import UserProfile, Document, Transaction, SystemSetting
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
@@ -86,3 +86,7 @@ class TransactionAdmin(admin.ModelAdmin):
     def mark_as_completed(self, request, queryset):
         queryset.update(status='completed')
         self.message_user(request, f"{queryset.count()} транзакций отмечены как выполненные.")
+@admin.register(SystemSetting)
+class SystemSettingAdmin(admin.ModelAdmin):
+    list_display = ('key', 'description', 'updated_at')
+    search_fields = ('key', 'description')
