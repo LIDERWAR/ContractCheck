@@ -52,6 +52,12 @@ try:
     remote_models = '/var/www/contractcheck/backend/api/models.py'
     sftp.put(local_models, remote_models)
     
+    # 6. Update migrations
+    print('Updating migration 0013...')
+    local_migration = r'd:\contractcheck\backend\api\migrations\0013_alter_document_file.py'
+    remote_migration = '/var/www/contractcheck/backend/api/migrations/0013_alter_document_file.py'
+    sftp.put(local_migration, remote_migration)
+    
     sftp.close()
     
     # 3. Restart Gunicorn and Celery to apply changes
