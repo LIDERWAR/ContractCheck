@@ -1,4 +1,4 @@
-# ContractCheck (CRISHA.RU)
+# ContractCheck
 
 Юридический ИИ-ассистент для анализа договоров и контрактов.
 
