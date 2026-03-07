@@ -45,6 +45,12 @@ try:
     local_tasks = r'd:\contractcheck\backend\api\tasks.py'
     remote_tasks = '/var/www/contractcheck/backend/api/tasks.py'
     sftp.put(local_tasks, remote_tasks)
+
+    # 5. Update models.py
+    print('Updating backend/api/models.py...')
+    local_models = r'd:\contractcheck\backend\api\models.py'
+    remote_models = '/var/www/contractcheck/backend/api/models.py'
+    sftp.put(local_models, remote_models)
     
     sftp.close()
     
