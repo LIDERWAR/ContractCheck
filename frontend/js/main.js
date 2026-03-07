@@ -640,7 +640,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         if (resultBaseState) resultBaseState.classList.add('opacity-0');
                         if (resultActionState) resultActionState.classList.remove('hidden');
                         if (viewResultBtn) {
-                            viewResultBtn.onclick = () => { window.location.href = 'register.html'; };
+                            viewResultBtn.onclick = () => { window.location.href = 'login.html'; };
                         }
                     }
                 }, 1000);
@@ -798,7 +798,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                             if (state.token) {
                                                 window.location.href = `document.html?id=${docId}`;
                                             } else {
-                                                window.location.href = 'register.html';
+                                                window.location.href = 'login.html';
                                             }
                                         };
                                     }
@@ -1113,7 +1113,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (localStorage.getItem('cc_token')) {
             window.location.href = 'dashboard.html';
         } else {
-            window.location.href = 'register.html';
+            window.location.href = 'login.html';
         }
     };
 
